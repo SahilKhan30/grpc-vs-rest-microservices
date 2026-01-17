@@ -1,23 +1,105 @@
-# gRPC vs REST: A Microservices Experiment
+gRPC vs REST – Microservices Playground
 
-This project is a small playground designed to look at how gRPC and REST handle inter-service communication in a real-world scenario. Instead of just talking about performance differences, I built three services that actually talk to each other to see how they feel in development and how they perform in practice.
+This repository is a small experimental project to compare gRPC and REST for service-to-service communication in a realistic microservices setup.
 
-## The Services
+⸻
 
-The project is split into three main pieces, each handling a specific part of a simple polling system:
+Project Overview
 
-*   **User Service**: This is where all the user profiles live. It handles everything from registration to basic lookups.
-*   **Vote Service**: A dedicated service for managing votes. It tracks which users have voted on which polls and keeps the tallies.
-*   **Poll Service (The Orchestrator)**: This is the "brain" of the project. It doesn't just manage polls; it aggregates data from both the User and Vote services.
+The system consists of three Spring Boot services:
 
-## How the Comparison Works
+1. User Service
+Responsible for storing and serving user profile data.
 
-The cool part of this setup is how the **Poll Service** bridges everything. 
+2. Vote Service
+Manages votes for polls – tracks which users voted and on which poll.
 
-To test the protocols, I set up a standard REST API endpoint on the Poll Service. When you hit this endpoint, the Poll Service has to go out and fetch details from the other two services to give you a full response.
+3. Poll Service
+This is the central service and the main subject of the experiment.
+It:
+	•	exposes a REST API to external clients
+	•	fetches user data from the User Service
+	•	fetches vote data from the Vote Service
+	•	aggregates everything into a single response
 
-I implemented this internal communication in two different ways so we can compare them side-by-side:
-1.  **The REST Way**: The Poll Service uses standard REST calls (via OpenFeign) to talk to the User and Vote services.
-2.  **The gRPC Way**: The Poll Service uses gRPC stubs to fetch the exact same data.
+⸻
 
-By calling the external REST API, you can trigger either an internal REST-to-REST flow or a REST-to-gRPC flow, making it easy to see exactly where the bottlenecks are and how much faster (or more complex) gRPC really is.
+Why this setup?
+
+The Poll Service supports two different internal communication modes while keeping the external API the same.
+
+REST → REST flow
+
+The Poll Service calls the User Service and Vote Service using REST (OpenFeign).
+
+REST → gRPC flow
+
+The Poll Service calls the same services using gRPC stubs generated from protobuf definitions.
+
+From the outside, clients always call the Poll Service using REST. Internally, the protocol can be switched to compare:
+	•	latency
+	•	throughput
+	•	CPU utilization
+	•	network payload size
+
+This allows a clean, side-by-side comparison under identical workloads.
+
+⸻
+
+
+Generating gRPC classes (important)
+
+This project uses protobuf for gRPC, so Java classes must be generated before running the services.
+
+From the project root:
+
+mvn clean install
+
+This will:
+	•	compile all .proto files
+	•	generate gRPC Java sources under target/generated-sources
+	•	install shared proto modules into your local Maven repository
+
+If this step is skipped, the Poll Service will fail to compile because the generated gRPC classes will be missing.
+
+
+⸻
+
+API Endpoints
+
+REST-based internal calls
+
+GET /api/rest/polls/info
+
+gRPC-based internal calls
+
+GET /api/grpc/polls/info
+
+Both endpoints return the same response structure. Only the internal protocol changes.
+
+⸻
+
+Benchmarking
+
+Example commands used for load testing:
+
+wrk -t4 -c20 -d30s http://localhost:8091/api/rest/polls/info
+wrk -t4 -c20 -d30s http://localhost:8091/api/grpc/polls/info
+
+CPU usage and process behavior can be observed using:
+	•	htop
+	•	Activity Monitor (CPU + Network tabs)
+
+Network usage and payload sizes can be estimated using:
+	•	Activity Monitor (Network tab totals)
+	•	wrk transfer statistics
+
+⸻
+
+
+This project is meant to be:
+	•	a learning tool
+	•	a performance comparison playground
+	•	a reference for REST vs gRPC integration in Spring Boot
+
+It is not intended to be production-ready or feature-complete.
