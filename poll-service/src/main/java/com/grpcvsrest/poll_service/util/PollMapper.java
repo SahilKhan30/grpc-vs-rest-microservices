@@ -1,8 +1,8 @@
 package com.grpcvsrest.poll_service.util;
 
-import com.grpcvsrest.poll_service.dto.PollCreateRequest;
-import com.grpcvsrest.poll_service.dto.PollResponse;
-import com.grpcvsrest.poll_service.dto.PollUpdateRequest;
+import com.grpcvsrest.poll_service.dto.request.PollCreateRequest;
+import com.grpcvsrest.poll_service.dto.response.PollResponse;
+import com.grpcvsrest.poll_service.dto.request.PollUpdateRequest;
 import com.grpcvsrest.poll_service.entity.Poll;
 import com.grpcvsrest.poll_service.entity.PollOption;
 

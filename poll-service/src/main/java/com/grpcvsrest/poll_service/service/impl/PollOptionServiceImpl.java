@@ -1,7 +1,7 @@
 package com.grpcvsrest.poll_service.service.impl;
 
-import com.grpcvsrest.poll_service.dto.PollOptionCreateUpdateRequest;
-import com.grpcvsrest.poll_service.dto.PollUpdateRequest;
+import com.grpcvsrest.poll_service.dto.request.PollOptionCreateUpdateRequest;
+import com.grpcvsrest.poll_service.dto.request.PollUpdateRequest;
 import com.grpcvsrest.poll_service.entity.Poll;
 import com.grpcvsrest.poll_service.entity.PollOption;
 import com.grpcvsrest.poll_service.service.PollOptionService;

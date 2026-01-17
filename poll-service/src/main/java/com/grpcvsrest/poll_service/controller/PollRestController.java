@@ -1,16 +1,15 @@
 package com.grpcvsrest.poll_service.controller;
 
-
-import com.grpcvsrest.poll_service.dto.PollCreateRequest;
-import com.grpcvsrest.poll_service.dto.PollResponse;
-import com.grpcvsrest.poll_service.dto.PollUpdateRequest;
+import com.grpcvsrest.poll_service.dto.request.PollCreateRequest;
+import com.grpcvsrest.poll_service.dto.response.PollInfoResponse;
+import com.grpcvsrest.poll_service.dto.response.PollResponse;
+import com.grpcvsrest.poll_service.dto.request.PollUpdateRequest;
 import com.grpcvsrest.poll_service.service.PollService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -18,7 +17,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/rest/polls")
 @RequiredArgsConstructor
-public class PollController {
+public class PollRestController {
 
     private final PollService pollService;
 
@@ -54,5 +53,11 @@ public class PollController {
         pollService.deletePoll(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/info")
+    public ResponseEntity<List<PollInfoResponse>> getPollInfo() {
+        return ResponseEntity.ok(pollService.getPollInfoRest());
+    }
+
 
 }

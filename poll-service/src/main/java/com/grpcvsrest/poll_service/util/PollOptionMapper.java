@@ -1,6 +1,6 @@
 package com.grpcvsrest.poll_service.util;
 
-import com.grpcvsrest.poll_service.dto.PollOptionResponse;
+import com.grpcvsrest.poll_service.dto.response.PollOptionResponse;
 import com.grpcvsrest.poll_service.entity.PollOption;
 
 public class PollOptionMapper {

@@ -1,4 +1,4 @@
-package com.grpcvsrest.poll_service.dto;
+package com.grpcvsrest.poll_service.dto.request;
 
 import com.grpcvsrest.poll_service.enums.PollCategory;
 import com.grpcvsrest.poll_service.enums.PollType;
@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.List;
 
 @Getter

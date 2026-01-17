@@ -1,8 +1,9 @@
-package com.grpcvsrest.poll_service.dto;
+package com.grpcvsrest.poll_service.dto.response;
 
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter

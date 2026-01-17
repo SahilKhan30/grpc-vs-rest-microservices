@@ -37,6 +37,13 @@ public class VoteController {
         return ResponseEntity.ok(voteResponse);
     }
 
+    @GetMapping("poll/{pollId}")
+    public ResponseEntity<List<VoteResponse>> getVoteByPollId(@PathVariable UUID pollId){
+        List<VoteResponse> voteResponses = voteService.getVotesByPollId(pollId);
+        return ResponseEntity.ok(voteResponses);
+    }
+
+
     @GetMapping
     public ResponseEntity<List<VoteResponse>> getAllVotes(){
         List<VoteResponse> voteResponseList = voteService.getAllVotes();

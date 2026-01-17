@@ -28,7 +28,7 @@ public class PollOption {
     private String optionText;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "poll_uuid", nullable = false, referencedColumnName = "uuid")
+    @JoinColumn(name = "poll_id", nullable = false, referencedColumnName = "uuid")
     private Poll poll;
 
     @Column(nullable = false, updatable = false)

@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package user;
+
+import "google/protobuf/timestamp.proto"; // for LocalDateTime
+
+option java_multiple_files = true;
+option java_package = "com.grpcvsrest.user_service.grpc";
+option java_outer_classname = "UserProto";
+
+// Gender enum
+enum Gender {
+  MALE = 0;
+  FEMALE = 1;
+  OTHER = 2;
+}
+
+// UserResponse message
+message UserResponse {
+  string id = 1; // UUID represented as string
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+  int32 age = 5;
+  Gender gender = 6;
+  string country = 7;
+  string city = 8;
+  string address = 9;
+  string postalCode = 10;
+  google.protobuf.Timestamp createdAt = 11;
+  google.protobuf.Timestamp updatedAt = 12;
+}
+
+// Request to fetch user by id
+message GetUserByIdRequest {
+  string id = 1;
+}
+
+// Service definition
+service UserService {
+  rpc GetUserById(GetUserByIdRequest) returns (UserResponse);
+}

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package vote;
+
+import "google/protobuf/timestamp.proto"; // for LocalDateTime
+
+
+option java_multiple_files = true;
+option java_package = "com.grpcvsrest.vote_service.grpc";
+option java_outer_classname = "VoteProto";
+
+// Vote entity
+message VoteResponse {
+  string id = 1;
+  string userId = 2;
+  string pollId = 3;
+  string pollOptionId = 4;
+  google.protobuf.Timestamp createdAt = 5;
+  google.protobuf.Timestamp updatedAt = 6;
+}
+
+
+// Request message
+message GetVotesByPollIdRequest {
+  string pollId = 1; // UUID as string
+}
+
+// Service definition
+service VoteService {
+  rpc GetVotesByPollId (GetVotesByPollIdRequest) returns (GetVotesByPollIdResponse);
+}
+
+
+// Response message (contains multiple votes)
+message GetVotesByPollIdResponse {
+  repeated VoteResponse votes = 1;
+}
+

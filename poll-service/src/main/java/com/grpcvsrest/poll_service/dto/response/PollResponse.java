@@ -1,7 +1,6 @@
-package com.grpcvsrest.poll_service.dto;
+package com.grpcvsrest.poll_service.dto.response;
 
 
-import com.grpcvsrest.poll_service.entity.PollOption;
 import com.grpcvsrest.poll_service.enums.PollCategory;
 import com.grpcvsrest.poll_service.enums.PollType;
 import lombok.*;

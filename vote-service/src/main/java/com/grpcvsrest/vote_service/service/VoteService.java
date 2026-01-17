@@ -1,5 +1,6 @@
 package com.grpcvsrest.vote_service.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grpcvsrest.vote_service.dto.VoteCreateRequest;
 import com.grpcvsrest.vote_service.dto.VoteResponse;
 
@@ -11,4 +12,5 @@ public interface VoteService {
     VoteResponse getVoteById(UUID id);
     List<VoteResponse> getAllVotes();
     void deleteVote(UUID id);
+    List<VoteResponse> getVotesByPollId(UUID pollId);
 }

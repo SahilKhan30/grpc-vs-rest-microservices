@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package poll;
+
+import "google/protobuf/timestamp.proto";
+import "user.proto";
+import "vote.proto";
+
+option java_multiple_files = true;
+option java_package = "com.grpcvsrest.poll_service.grpc";
+option java_outer_classname = "PollProto";
+
+// Service definition
+service PollService {
+  rpc GetPollInfo (PollInfoRequest) returns (PollInfoResponseList);
+}
+
+// --- Messages ---
+
+// Request message (you can expand this later with filters)
+message PollInfoRequest {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+// Response wrapper for multiple polls
+message PollInfoResponseList {
+  repeated PollInfoResponse polls = 1;
+}
+
+// Combined poll + user + vote details
+message PollInfoResponse {
+  string id = 1;
+  user.UserResponse userResponse = 2;
+  string title = 3;
+  string description = 4;
+  string pollType = 5;
+  string pollCategory = 6;
+  repeated PollOptionResponse pollOptions = 7;
+  repeated vote.VoteResponse pollVotes = 8;
+  google.protobuf.Timestamp createdAt = 9;
+  google.protobuf.Timestamp updatedAt = 10;
+}
+
+// Option under a poll
+message PollOptionResponse {
+  string id = 1;
+  string pollId = 2;
+  string optionText = 3;
+  google.protobuf.Timestamp createdAt = 4;
+  google.protobuf.Timestamp updatedAt = 5;
+
+}
