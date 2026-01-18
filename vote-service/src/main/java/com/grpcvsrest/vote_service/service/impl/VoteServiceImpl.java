@@ -3,12 +3,9 @@ package com.grpcvsrest.vote_service.service.impl;
 import com.grpcvsrest.vote_service.dto.VoteCreateRequest;
 import com.grpcvsrest.vote_service.dto.VoteResponse;
 import com.grpcvsrest.vote_service.entity.Vote;
-import com.grpcvsrest.vote_service.grpc.GetVotesByPollIdRequest;
-import com.grpcvsrest.vote_service.grpc.GetVotesByPollIdResponse;
 import com.grpcvsrest.vote_service.repository.VoteRepository;
 import com.grpcvsrest.vote_service.service.VoteService;
 import com.grpcvsrest.vote_service.util.VoteMapper;
-import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +30,7 @@ public class VoteServiceImpl implements VoteService {
     @Override
     public VoteResponse getVoteById(UUID id) {
         Vote vote = voteRepository.findByUuid(id)
-                .orElseThrow(()->new RuntimeException("Vote not found"));
+                .orElseThrow(() -> new RuntimeException("Vote not found"));
         return VoteMapper.toResponse(vote);
     }
 
@@ -45,15 +42,15 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public void deleteVote(UUID uuid){
+    public void deleteVote(UUID uuid) {
         Vote vote = voteRepository.findByUuid(uuid)
-                .orElseThrow(()->new RuntimeException("Vote not found"));
+                .orElseThrow(() -> new RuntimeException("Vote not found"));
         voteRepository.delete(vote);
     }
 
     @Override
     public List<VoteResponse> getVotesByPollId(UUID pollId) {
-        List<VoteResponse> votesData =   voteRepository.findByPollId(pollId).stream()
+        List<VoteResponse> votesData = voteRepository.findByPollId(pollId).stream()
                 .map(VoteMapper::toResponse)
                 .toList();
 
@@ -64,6 +61,5 @@ public class VoteServiceImpl implements VoteService {
                 .flatMap(List::stream)
                 .toList();
     }
-
 
 }

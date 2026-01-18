@@ -1,6 +1,5 @@
 package com.grpcvsrest.vote_service.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grpcvsrest.vote_service.dto.VoteCreateRequest;
 import com.grpcvsrest.vote_service.dto.VoteResponse;
 
@@ -9,8 +8,12 @@ import java.util.UUID;
 
 public interface VoteService {
     VoteResponse createVote(VoteCreateRequest voteCreateRequest);
+
     VoteResponse getVoteById(UUID id);
+
     List<VoteResponse> getAllVotes();
+
     void deleteVote(UUID id);
+
     List<VoteResponse> getVotesByPollId(UUID pollId);
 }
