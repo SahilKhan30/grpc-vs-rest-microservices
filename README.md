@@ -100,6 +100,24 @@ The endpoint returns a fixed response while still executing all internal service
 
 ---
 
+## Benchmarking Results
+
+After running the `wrk` tests mentioned above, here is a summary of the performance differences observed:
+
+| Metric | REST | gRPC | Improvement |
+| :--- | :--- | :--- | :--- |
+| **Requests / sec** | 111 | 257 | **~2.3x Higher** |
+| **Payload Size (per req)** | ~7.62 MB | ~4.84 MB | **~36% Smaller** |
+
+
+*  [Latency comparison](./benchmarks/latency/grpc-vs-rest-latency.jpeg)
+*  [Network usage](./benchmarks/network)
+
+These results show that gRPC transfers less data per request and achieves lower latency for internal service calls.
+
+
+---
+
 ## Notes
 
 This project is meant to be:
