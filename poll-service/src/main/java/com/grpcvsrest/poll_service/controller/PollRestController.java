@@ -55,8 +55,10 @@ public class PollRestController {
     }
 
     @GetMapping("/info")
-    public ResponseEntity<List<PollInfoResponse>> getPollInfo() {
-        return ResponseEntity.ok(pollService.getPollInfoRest());
+    public ResponseEntity<String> getPollInfo() {
+        List<PollInfoResponse> pollInfoResponses =  pollService.getPollInfoRest();
+        System.out.println(pollInfoResponses);
+        return ResponseEntity.ok("success");
     }
 
 

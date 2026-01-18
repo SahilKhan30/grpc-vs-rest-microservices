@@ -76,7 +76,7 @@ GET /api/rest/polls/info
 GET /api/grpc/polls/info
 ```
 
-Both endpoints return the same response structure. Only the internal protocol changes.
+Both endpoints return the same response. Only the internal protocol changes.
 
 ---
 
@@ -95,7 +95,8 @@ CPU usage and process behavior can be observed using:
 
 Network usage and payload sizes can be estimated using:
 *   Activity Monitor (Network tab totals)
-*   `wrk` transfer statistics
+
+The endpoint returns a fixed response while still executing all internal service calls, so the benchmark reflects only service-to-service communication.
 
 ---
 

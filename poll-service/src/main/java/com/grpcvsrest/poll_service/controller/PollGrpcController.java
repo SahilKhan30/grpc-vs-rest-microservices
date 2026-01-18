@@ -17,7 +17,9 @@ public class PollGrpcController {
     private final PollService pollService;
 
     @GetMapping("/info")
-    public ResponseEntity<List<PollInfoResponse>> getPollInfo() {
-        return ResponseEntity.ok(pollService.getPollInfoGrpc());
+    public ResponseEntity<String> getPollInfo() {
+        List<PollInfoResponse> pollInfoResponses = pollService.getPollInfoGrpc();
+        System.out.println(pollInfoResponses);
+        return ResponseEntity.ok("success");
     }
 }
