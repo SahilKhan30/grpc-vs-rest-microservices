@@ -107,13 +107,13 @@ After running the `wrk` tests mentioned above, here is a summary of the performa
 | Metric | REST | gRPC | Improvement |
 | :--- | :--- | :--- | :--- |
 | **Requests / sec** | 111 | 257 | **~2.3x Higher** |
-| **Payload Size (per req)** | ~7.62 MB | ~4.84 MB | **~36% Smaller** |
+| **Network data transferred (per req)** | ~7.62 MB | ~4.84 MB | **~36% Smaller** |
 
 
 *  [Latency comparison](./benchmarks/latency/grpc-vs-rest-latency.jpeg)
 *  [Network usage](./benchmarks/network)
 
-These results show that gRPC transfers less data per request and achieves lower latency for internal service calls.
+These results show that gRPC transfers less network data per request and achieves lower latency for internal service calls.
 
 
 ---
