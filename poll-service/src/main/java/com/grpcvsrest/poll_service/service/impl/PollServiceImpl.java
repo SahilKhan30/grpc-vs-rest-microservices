@@ -87,9 +87,6 @@ public class PollServiceImpl implements PollService {
                 .stream()
                 .map(poll -> {
                     PollResponse pollResponse = PollMapper.toResponse(poll);
-                    GetUserByIdRequest request = GetUserByIdRequest.newBuilder()
-                            .setId(String.valueOf(pollResponse.getUserId()))
-                            .build();
                     UserResponse userResponse = userRestClient.getUserById(pollResponse.getUserId());
                     List<VoteResponse> voteResponseList = voteRestClient.getVoteByPollId(pollResponse.getId());
                     return PollInfoMapper.toResponse(pollResponse,userResponse, voteResponseList);
